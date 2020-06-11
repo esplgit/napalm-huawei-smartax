@@ -1,45 +1,10 @@
-# -*- coding: utf-8 -*-
-# Copyright 2020 2016 Dravetech AB. All rights reserved.
-#
-# The contents of this file are licensed under the Apache License, Version 2.0
-# (the "License"); you may not use this file except in compliance with the
-# License. You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations under
-# the License.
+""" NAPALM driver for Huawei SmartAX and OLT Using SSH. """
 
-"""
-Napalm driver for huawei Enterprise switch, community.
-
-Read https://napalm.readthedocs.io for more information.
-"""
+import socket
+import telnetlib
 
 from napalm.base import NetworkDriver
-import napalm.base.helpers
 from napalm.base.netmiko_helpers import netmiko_args
-import napalm.base.constants as c
-from napalm.base.exceptions import (
-    MergeConfigException,
-    ReplaceConfigException,
-    CommandErrorException,
-    CommitError,
-)
-
-from datetime import datetime
-import socket
-import re
-import telnetlib
-import os
-import tempfile
-import paramiko
-import uuid
-import hashlib
-
 
 
 class SmartAXDriver(NetworkDriver):
@@ -101,7 +66,8 @@ class SmartAXDriver(NetworkDriver):
 
         # Set the default port if not set
         default_port = {"ssh": 22, "telnet": 23}
-        self.netmiko_optional_args.setdefault("port", default_port[self.transport])
+        self.netmiko_optional_args.setdefault(
+            "port", default_port[self.transport])
 
         # Control automatic execution of 'file prompt quiet' for file operations
         # self.auto_file_prompt = optional_args.get("auto_file_prompt", True)
