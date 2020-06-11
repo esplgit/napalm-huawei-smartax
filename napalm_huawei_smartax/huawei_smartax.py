@@ -77,6 +77,8 @@ class SmartAXDriver(NetworkDriver):
         # Track whether 'file prompt quiet' is known to be configured
         # self.prompt_quiet_configured = None
 
+        self.force_no_enable = False
+
     def open(self):
         """Open a connection to the device.
         """
